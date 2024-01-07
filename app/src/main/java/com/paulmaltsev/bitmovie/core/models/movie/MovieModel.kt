@@ -21,4 +21,6 @@ data class MovieModel(
     val posterPath: String? = null,
     @SerializedName("backdrop_path")
     val backdropPath: String? = null,
+    @SerializedName("vote_average")
+    val voteAverage: Double? = null,
 )

@@ -163,6 +163,15 @@ private fun MovieDetails(
             color = Color.Gray
         )
 
+        AppSpacer(dimensionResource(id = R.dimen.padding_small))
+
+        Text(
+            text = "Rating: ${movie.voteAverage ?: "-"}",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            color = Color.Gray
+        )
+
         AppSpacer()
 
         Text(
