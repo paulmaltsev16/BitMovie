@@ -1,4 +1,4 @@
-package com.paulmaltsev.bitmovie.ui.theme
+package com.paulmaltsev.bitmovie.core.ui.theme
 
 import android.app.Activity
 import android.os.Build

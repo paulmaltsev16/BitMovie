@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.core.navigation.AppNavigation
-import com.paulmaltsev.bitmovie.ui.theme.BitMovieTheme
+import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

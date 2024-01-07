@@ -1,4 +1,4 @@
-package com.paulmaltsev.bitmovie.core.views
+package com.paulmaltsev.bitmovie.core.ui.views
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
