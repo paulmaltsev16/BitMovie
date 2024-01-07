@@ -1,23 +1,28 @@
 package com.paulmaltsev.bitmovie.features.movieDetails.viewModel
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.paulmaltsev.bitmovie.core.data.constants.Constants
 import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
 import com.paulmaltsev.bitmovie.core.data.remote.api.MoviesApi
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
+import com.paulmaltsev.bitmovie.features.favorites.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel : ViewModel() {
+class MovieDetailsViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val preferences = application.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME, 0)
+    private val favoriteRepository = FavoriteRepository(preferences)
 
     private var _movie = MutableStateFlow<MovieModel?>(null)
     val movie get() = _movie.asStateFlow()
+
+    private var _isFavoriteMovie = MutableStateFlow(false)
+    val isFavoriteMovie get() = _isFavoriteMovie.asStateFlow()
 
     fun getMovieDetailsById(id: String?) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -26,12 +31,22 @@ class MovieDetailsViewModel : ViewModel() {
             val result = api.getMovieDetails(id)
             result.body()?.let { movie ->
                 _movie.emit(movie)
+                updateIsFavoriteFlow()
             }
         }
     }
 
-    fun getFavoriteIcon(): ImageVector {
-        val isMovieInFavorite = true
-        return if (isMovieInFavorite) Icons.Filled.Favorite else Icons.Outlined.Favorite
+    fun updateFavoriteWithMovie() {
+        movie.value?.let { movie ->
+            favoriteRepository.updateFavorites(movie)
+            updateIsFavoriteFlow()
+        }
+    }
+
+    private fun updateIsFavoriteFlow() {
+        viewModelScope.launch {
+            val isFavoriteMovie = favoriteRepository.isFavoriteMovie(movieId = movie.value?.id)
+            _isFavoriteMovie.emit(isFavoriteMovie)
+        }
     }
 }

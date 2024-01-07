@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import coil.compose.AsyncImage
+import com.paulmaltsev.bitmovie.BuildConfig
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
@@ -43,7 +44,7 @@ fun MovieItem(
                 .height(IntrinsicSize.Max)
         ) {
             AsyncImage(
-                model = movie.posterPath,
+                model = BuildConfig.TMDB_IMAGE_BASE_URL + movie.posterPath,
                 contentDescription = stringResource(id = R.string.content_description_movie_remote_image),
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
