@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,10 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,12 +50,25 @@ fun HomeScreen(navController: NavController) {
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        Image(
-            painterResource(id = R.drawable.logo_app),
-            stringResource(R.string.content_description_app_logo),
-            modifier = Modifier.fillMaxWidth(),
-            contentScale = ContentScale.FillWidth
-        )
+        Box {
+            Image(
+                painterResource(id = R.drawable.logo_app),
+                stringResource(R.string.content_description_app_logo),
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            IconButton(
+                onClick = { navController.navigate(AppScreens.Favorites.route) },
+                modifier = Modifier.align(Alignment.TopEnd)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = stringResource(id = R.string.content_description_favorite_icon)
+                )
+            }
+        }
+
 
         DataSourceLegend {
             navController.navigate(AppScreens.TmdbLegalContent.route)
@@ -64,8 +82,7 @@ fun HomeScreen(navController: NavController) {
             items(movies.value.size) {
                 val movie = movies.value[it]
                 MovieItem(
-                    movie = movie,
-                    modifier = Modifier
+                    movie = movie, modifier = Modifier
                         .width(250.dp)
                         .height(150.dp)
                 ) {
