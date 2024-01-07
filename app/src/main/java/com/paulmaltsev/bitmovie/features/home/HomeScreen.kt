@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,8 +37,8 @@ import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
+import com.paulmaltsev.bitmovie.core.ui.views.MovieItem
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
-import com.paulmaltsev.bitmovie.features.home.components.MovieItem
 import com.paulmaltsev.bitmovie.features.home.viewModel.HomeViewModel
 
 @Composable
@@ -81,9 +82,12 @@ fun HomeScreen(navController: NavController) {
             items(movies.value.size) {
                 val movie = movies.value[it]
                 MovieItem(
-                    movie = movie, modifier = Modifier
+                    movie = movie,
+                    modifier = Modifier
                         .width(250.dp)
                         .height(150.dp)
+                        .fillMaxSize()
+                        .height(IntrinsicSize.Max)
                 ) {
                     navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)
                 }

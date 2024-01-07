@@ -19,12 +19,12 @@ import androidx.navigation.NavController
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.ui.views.AppSpacer
-import com.paulmaltsev.bitmovie.features.legalContent.tmdb.components.TmdbTopBar
+import com.paulmaltsev.bitmovie.core.ui.views.AppTopBar
 
 @Composable
 fun TmdbScreen(navController: NavController) {
     Scaffold(
-        topBar = TmdbTopBar {
+        topBar = AppTopBar(title = stringResource(R.string.the_movie_database)) {
             navController.popBackStack()
         },
     ) {

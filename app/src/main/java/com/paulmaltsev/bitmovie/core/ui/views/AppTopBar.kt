@@ -1,4 +1,4 @@
-package com.paulmaltsev.bitmovie.features.legalContent.tmdb.components
+package com.paulmaltsev.bitmovie.core.ui.views
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -13,13 +13,17 @@ import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.utils.ComposableVoidCallback
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TmdbTopBar(onBackButtonClick: VoidCallback): ComposableVoidCallback {
+fun AppTopBar(
+    title: String,
+    onBackButtonClick: VoidCallback
+): ComposableVoidCallback {
     return {
         TopAppBar(
             title = {
-                Text(text = stringResource(R.string.the_movie_database))
+                Text(text = title)
             },
             navigationIcon = {
                 IconButton(onClick = onBackButtonClick) {

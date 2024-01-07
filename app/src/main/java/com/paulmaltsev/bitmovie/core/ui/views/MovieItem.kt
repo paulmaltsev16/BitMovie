@@ -1,11 +1,10 @@
-package com.paulmaltsev.bitmovie.features.home.components
+package com.paulmaltsev.bitmovie.core.ui.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,11 +37,7 @@ fun MovieItem(
         onClick = onClick,
         modifier = modifier
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .height(IntrinsicSize.Max)
-        ) {
+        Box {
             AsyncImage(
                 model = BuildConfig.TMDB_IMAGE_BASE_URL + movie.posterPath,
                 contentDescription = stringResource(id = R.string.content_description_movie_remote_image),
@@ -61,8 +56,7 @@ fun MovieItem(
                     .background(
                         brush = Brush.verticalGradient(
                             colors = listOf(
-                                Color.Transparent,
-                                Color.Black
+                                Color.Transparent, Color.Black
                             )
                         )
                     )
@@ -84,7 +78,11 @@ fun BeerItemPreview() {
                 originalTitle = "Movie original title",
                 releaseDate = "07-01-2024",
                 posterPath = "https://media.istockphoto.com/id/825882974/photo/between-day-and-night.jpg?s=2048x2048&w=is&k=20&c=xHhs07OL7-l36jqHNg8nEpAxBBjinMmu8sr-FA4MOfs="
-            ), modifier = Modifier.fillMaxSize()
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+                .appPadding()
         ) {}
     }
 }

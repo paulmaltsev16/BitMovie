@@ -25,6 +25,12 @@ class FavoriteRepository(private val preferences: SharedPreferences) {
         return storedObject != null
     }
 
+    fun getMoviesFromPreferences(): ArrayList<MovieModel> {
+        val json = preferences.getString(SharedPrefKeys.FAVORITE_MOVIES, "")
+        val movies = fromJson<MovieModel>(json ?: "") ?: listOf()
+        return ArrayList(movies)
+    }
+
     private fun removeMovieFromFavorite(movieId: Int) {
         val movies = getMoviesFromPreferences()
         movies.removeIf {
@@ -41,11 +47,5 @@ class FavoriteRepository(private val preferences: SharedPreferences) {
 
     private fun saveMoviesToPreferences(newJson: String) {
         preferences.edit().putString(SharedPrefKeys.FAVORITE_MOVIES, newJson).apply()
-    }
-
-    private fun getMoviesFromPreferences(): ArrayList<MovieModel> {
-        val json = preferences.getString(SharedPrefKeys.FAVORITE_MOVIES, "")
-        val movies = fromJson<MovieModel>(json ?: "") ?: listOf()
-        return ArrayList(movies)
     }
 }

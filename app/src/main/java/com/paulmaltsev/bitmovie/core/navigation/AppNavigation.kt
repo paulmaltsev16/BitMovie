@@ -27,7 +27,7 @@ fun AppNavigation(navController: NavHostController) {
             MovieDetailsScreen(id, navController)
         }
         composable(AppScreens.Favorites.route) {
-            FavoritesScreen()
+            FavoritesScreen(navController)
         }
         composable(AppScreens.TmdbLegalContent.route) {
             TmdbScreen(navController)
