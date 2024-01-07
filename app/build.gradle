@@ -20,6 +20,7 @@ android {
         }
 
         buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org\""
+        buildConfigField "String", "API_KEY", "\"ed545dcbde4d4adc1ac59c7aaca07ecd\""
         buildConfigField "String", "API_READ_ACCESS_TOKEN", "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZDU0NWRjYmRlNGQ0YWRjMWFjNTljN2FhY2EwN2VjZCIsInN1YiI6IjY1OWE2NmRlN2UxMmYwMDA5NTMyZmQ3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.L1TeEIdIp8eFHyko_q27feLMu08PnlQoF0NupSNqLiA\""
     }
 
