@@ -7,9 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun MovieDetailsScreen() {
+fun MovieDetailsScreen(movieId: String?) {
     Text(
-        "MovieDetailsScreen",
+        "MovieDetailsScreen $movieId",
         modifier = Modifier.fillMaxSize(),
         textAlign = TextAlign.Center
     )

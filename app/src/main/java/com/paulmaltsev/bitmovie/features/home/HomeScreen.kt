@@ -1,6 +1,5 @@
 package com.paulmaltsev.bitmovie.features.home
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -86,7 +85,7 @@ fun HomeScreen(navController: NavController) {
                         .width(250.dp)
                         .height(150.dp)
                 ) {
-                    Log.i("tester", "selected movie: $movie")
+                    navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)
                 }
             }
         }

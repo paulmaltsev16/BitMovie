@@ -22,8 +22,9 @@ fun AppNavigation(navController: NavHostController) {
         composable(AppScreens.MovieCategory.route) {
             MovieCategoryScreen()
         }
-        composable(AppScreens.MovieDetails.route) {
-            MovieDetailsScreen()
+        composable(AppScreens.MovieDetails.route + "/" + "{movieId}") { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("movieId")
+            MovieDetailsScreen(id)
         }
         composable(AppScreens.Favorites.route) {
             FavoritesScreen()
