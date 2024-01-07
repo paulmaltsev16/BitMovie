@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
+import com.paulmaltsev.bitmovie.core.data.remote.api.MoviesApi
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.core.models.movie.MovieResponse
 import kotlinx.coroutines.Dispatchers
@@ -30,15 +31,4 @@ class HomeViewModel : ViewModel() {
             _movies.emit(result.body()?.movies ?: arrayListOf())
         }
     }
-}
-
-interface MoviesApi {
-
-//    --url 'https://api.themoviedb.org' \
-
-    @GET("/3/movie/upcoming?language=en-US&page=1")
-    suspend fun getMovies(
-//        @Query("page") page: Int,
-//        @Query("language") language: String = "en-US"
-    ): Response<MovieResponse>
 }
