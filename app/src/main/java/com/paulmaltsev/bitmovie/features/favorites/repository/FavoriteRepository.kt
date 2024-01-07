@@ -6,9 +6,15 @@ import com.paulmaltsev.bitmovie.core.extensions.fromJson
 import com.paulmaltsev.bitmovie.core.extensions.toJson
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 
-class FavoriteRepository(private val preferences: SharedPreferences) {
+interface FavoriteRepository {
+    fun updateFavorites(movie: MovieModel)
+    fun isFavoriteMovie(movieId: Int?): Boolean
+    fun getMoviesFromPreferences(): ArrayList<MovieModel>
+}
 
-    fun updateFavorites(movie: MovieModel) {
+class FavoriteRepositoryImpl(private val preferences: SharedPreferences) : FavoriteRepository {
+
+    override fun updateFavorites(movie: MovieModel) {
         val movieId = movie.id ?: return
         if (isFavoriteMovie(movieId)) {
             removeMovieFromFavorite(movieId)
@@ -17,7 +23,7 @@ class FavoriteRepository(private val preferences: SharedPreferences) {
         }
     }
 
-    fun isFavoriteMovie(movieId: Int?): Boolean {
+    override fun isFavoriteMovie(movieId: Int?): Boolean {
         val movies = getMoviesFromPreferences()
         val storedObject = movies.firstOrNull {
             it.id == movieId
@@ -25,7 +31,7 @@ class FavoriteRepository(private val preferences: SharedPreferences) {
         return storedObject != null
     }
 
-    fun getMoviesFromPreferences(): ArrayList<MovieModel> {
+    override fun getMoviesFromPreferences(): ArrayList<MovieModel> {
         val json = preferences.getString(SharedPrefKeys.FAVORITE_MOVIES, "")
         val movies = fromJson<MovieModel>(json ?: "") ?: listOf()
         return ArrayList(movies)

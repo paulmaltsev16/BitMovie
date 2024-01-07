@@ -7,10 +7,15 @@ import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 
 private const val TAG = "MoviesRepository"
 
-class MoviesRepository(
+interface MoviesRepository {
+    suspend fun downloadMovies(movieCollection: String, page: Int): ArrayList<MovieModel>
+    suspend fun getMovieDetailsById(id: String?): MovieModel?
+}
+
+class MoviesRepositoryImpl(
     private val client: RetrofitClient
-) {
-    suspend fun downloadMovies(movieCollection: String, page: Int): ArrayList<MovieModel> {
+) : MoviesRepository {
+    override suspend fun downloadMovies(movieCollection: String, page: Int): ArrayList<MovieModel> {
         return try {
             val api = client.instance.create(MoviesApi::class.java)
             val result = api.getMovies(movieCollection, page)
@@ -21,7 +26,7 @@ class MoviesRepository(
         }
     }
 
-    suspend fun getMovieDetailsById(id: String?): MovieModel? {
+    override suspend fun getMovieDetailsById(id: String?): MovieModel? {
         id ?: return null
         return try {
             val api = client.instance.create(MoviesApi::class.java)

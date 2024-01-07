@@ -6,6 +6,7 @@ import com.paulmaltsev.bitmovie.core.data.constants.MoviesCollections
 import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepository
+import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -27,7 +28,8 @@ class HomeViewModel : ViewModel() {
     private var _moviesNowPlaying = MutableStateFlow(arrayListOf<MovieModel>())
     val moviesNowPlaying = _moviesNowPlaying.asStateFlow()
 
-    private val moviesRepository = MoviesRepository(RetrofitClient)
+    // Should be injected with dagger
+    private val moviesRepository:MoviesRepository = MoviesRepositoryImpl(RetrofitClient)
 
     init {
         downloadMovies()
