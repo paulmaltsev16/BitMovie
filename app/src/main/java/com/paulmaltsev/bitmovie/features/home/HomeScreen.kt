@@ -21,6 +21,9 @@ fun HomeScreen(navController: NavController) {
         Button(onClick = { navController.navigate(AppScreens.MovieDetails.route) }) {
             Text(text = "Go to movie details")
         }
+        Button(onClick = { navController.navigate(AppScreens.Favorites.route) }) {
+            Text(text = "Go to movie favorites")
+        }
         Button(onClick = { navController.navigate(AppScreens.TmdbLegalContent.route) }) {
             Text(text = "Go to tmdb")
         }
