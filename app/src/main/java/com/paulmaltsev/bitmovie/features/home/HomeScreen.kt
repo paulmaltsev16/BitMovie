@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
@@ -25,16 +26,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
+import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
 import com.paulmaltsev.bitmovie.core.ui.views.MovieItem
@@ -46,12 +52,15 @@ fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = viewModel()
 ) {
-    val movies = viewModel.movies.collectAsStateWithLifecycle(arrayListOf())
+    val moviesUpcoming = viewModel.moviesUpcoming.collectAsStateWithLifecycle(arrayListOf())
+    val moviesTopRated = viewModel.moviesTopRated.collectAsStateWithLifecycle(arrayListOf())
+    val moviesNowPlaying = viewModel.moviesNowPlaying.collectAsStateWithLifecycle(arrayListOf())
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .padding(bottom = dimensionResource(id = R.dimen.padding_big))
     ) {
         Box {
             Image(
@@ -72,30 +81,18 @@ fun HomeScreen(
             }
         }
 
-
         DataSourceLegend {
             navController.navigate(AppScreens.TmdbLegalContent.route)
         }
 
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            contentPadding = PaddingValues(16.dp),
-        ) {
-            items(movies.value.size) {
-                val movie = movies.value[it]
-                MovieItem(
-                    movie = movie,
-                    modifier = Modifier
-                        .width(250.dp)
-                        .height(150.dp)
-                        .fillMaxSize()
-                        .height(IntrinsicSize.Max)
-                ) {
-                    navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)
-                }
-            }
-        }
+        MovieCollectionName(stringResource(id = R.string.upcoming))
+        MovieLazyList(moviesUpcoming.value, navController)
+
+        MovieCollectionName(stringResource(id = R.string.top_rated))
+        MovieLazyList(moviesTopRated.value, navController)
+
+        MovieCollectionName(stringResource(id = R.string.now_playing))
+        MovieLazyList(moviesNowPlaying.value, navController)
     }
 }
 
@@ -112,10 +109,48 @@ private fun DataSourceLegend(onClick: VoidCallback) {
     )
 }
 
+@Composable
+private fun MovieCollectionName(name: String) {
+    Text(
+        text = name,
+        color = colorResource(id = R.color.blue_main),
+        fontWeight = FontWeight.Bold,
+        fontSize = 30.sp,
+        modifier = Modifier.padding(
+            start = dimensionResource(id = R.dimen.padding_standard),
+            end = dimensionResource(id = R.dimen.padding_standard),
+            top = dimensionResource(id = R.dimen.padding_big),
+        )
+    )
+}
+
+@Composable
+private fun MovieLazyList(movies: ArrayList<MovieModel>, navController: NavController) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        contentPadding = PaddingValues(16.dp),
+    ) {
+        items(movies.size) {
+            val movie = movies[it]
+            MovieItem(
+                movie = movie,
+                modifier = Modifier
+                    .width(250.dp)
+                    .height(150.dp)
+                    .fillMaxSize()
+                    .height(IntrinsicSize.Max)
+            ) {
+                navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)
+            }
+        }
+    }
+}
+
 
 @Preview
 @Composable
-fun BeerItemPreview() {
+fun BitItemPreview() {
     BitMovieTheme {
         val navController = rememberNavController()
         HomeScreen(navController)

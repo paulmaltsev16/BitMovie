@@ -11,4 +11,7 @@
     <string name="content_description_play_icon">Play icon\n</string>
     <string name="favorites">Favorites</string>
     <string name="connection_lost">Connection lost</string>
+    <string name="upcoming">Upcoming\n</string>
+    <string name="top_rated">Top rated\n</string>
+    <string name="now_playing">Now playing\n</string>
 </resources>
