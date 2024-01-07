@@ -21,6 +21,10 @@ import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.ui.views.AppSpacer
 import com.paulmaltsev.bitmovie.core.ui.views.AppTopBar
 
+/**
+ * According to the documentation, TMDB provides dates for free. The service only requires
+ * contribution it as a data source.
+ */
 @Composable
 fun TmdbScreen(navController: NavController) {
     Scaffold(

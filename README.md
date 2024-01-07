@@ -1,4 +1,7 @@
 # BitMovie
+<p align="center">
+  <img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/10e3f85f-185d-4f1e-85cf-e806fe4700ee" alt="App logo">
+</p>
 
 ## Stack:
 
@@ -44,3 +47,13 @@ to speed up development and improve the code's readability.
 6. Favorite movies have to be stored on a remote source that requires user authentication.
 7. Because there is shared preference to store favorites, there are performance issues.
 8. Use Dagger Hilt for dependency injection.
+
+Screenshots:
+
+<div align="center">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/3dbc3145-ca35-4b13-9ea2-161e17e64e75" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/08938293-db49-4fd4-bca8-0d137e23c630" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/030cb9be-ba07-4f88-903b-1a78d84835c0" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/306dda44-fc38-4da9-9128-0a8167524084" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/05da2bca-26d8-4955-8379-80c17c8d24fd" alt="Screenshor_1" width="150" height="300">
+</div>
