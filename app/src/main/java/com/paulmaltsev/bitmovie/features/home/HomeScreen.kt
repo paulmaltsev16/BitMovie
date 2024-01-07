@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -86,13 +87,19 @@ fun HomeScreen(
         }
 
         MovieCollectionName(stringResource(id = R.string.upcoming))
-        MovieLazyList(moviesUpcoming.value, navController)
+        MovieLazyList(moviesUpcoming.value, navController) {
+            viewModel.loadNextUpcomingMovies()
+        }
 
         MovieCollectionName(stringResource(id = R.string.top_rated))
-        MovieLazyList(moviesTopRated.value, navController)
+        MovieLazyList(moviesTopRated.value, navController) {
+            viewModel.loadNextTopRatedMovies()
+        }
 
         MovieCollectionName(stringResource(id = R.string.now_playing))
-        MovieLazyList(moviesNowPlaying.value, navController)
+        MovieLazyList(moviesNowPlaying.value, navController) {
+            viewModel.loadNextNowPlayingMovies()
+        }
     }
 }
 
@@ -125,7 +132,11 @@ private fun MovieCollectionName(name: String) {
 }
 
 @Composable
-private fun MovieLazyList(movies: ArrayList<MovieModel>, navController: NavController) {
+private fun MovieLazyList(
+    movies: ArrayList<MovieModel>,
+    navController: NavController,
+    onReachEnd: VoidCallback
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -142,6 +153,11 @@ private fun MovieLazyList(movies: ArrayList<MovieModel>, navController: NavContr
                     .height(IntrinsicSize.Max)
             ) {
                 navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)
+            }
+        }
+        item {
+            LaunchedEffect(true) {
+                onReachEnd()
             }
         }
     }

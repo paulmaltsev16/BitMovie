@@ -94,13 +94,6 @@ fun MovieDetailsScreen(
                         tint = Color.Black
                     )
                 }
-                IconButton(onClick = { }) {
-                    Icon(
-                        imageVector = Icons.Default.PlayCircle,
-                        contentDescription = stringResource(id = R.string.content_description_play_icon),
-                        tint = Color.Black
-                    )
-                }
             }
 
             AppSpacer()
