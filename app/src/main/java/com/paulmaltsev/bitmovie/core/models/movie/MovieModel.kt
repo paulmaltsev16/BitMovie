@@ -4,19 +4,21 @@ import com.google.gson.annotations.SerializedName
 
 data class MovieModel(
     @SerializedName("id")
-    val id: Int?,
+    val id: Int? = null,
+    @SerializedName("title")
+    val title: String? = null,
     @SerializedName("original_title")
-    val originalTitle: String?,
+    val originalTitle: String? = null,
     @SerializedName("video")
-    val video: Boolean?,
+    val video: Boolean? = null,
     @SerializedName("overview")
-    val overview: String?,
+    val overview: String? = null,
     @SerializedName("popularity")
-    val popularity: Double?,
+    val popularity: Double? = null,
     @SerializedName("release_date")
-    val releaseDate: String?,
+    val releaseDate: String? = null,
     @SerializedName("poster_path")
-    val posterPath: String?,
+    val posterPath: String? = null,
     @SerializedName("backdrop_path")
-    val backdropPath: String?,
+    val backdropPath: String? = null,
 )

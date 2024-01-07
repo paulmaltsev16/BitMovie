@@ -37,7 +37,7 @@ object RetrofitClient {
 
     private fun initInterceptor(): Interceptor = Interceptor { chain ->
         val request: Request = chain.request().newBuilder()
-            .header(Headers.AUTHORIZATION, "Bearer ${BuildConfig.API_READ_ACCESS_TOKEN}")
+            .header(Headers.AUTHORIZATION, "Bearer " + BuildConfig.API_READ_ACCESS_TOKEN)
             .header(Headers.ACCEPT, "application/json")
             .build()
         chain.proceed(request)

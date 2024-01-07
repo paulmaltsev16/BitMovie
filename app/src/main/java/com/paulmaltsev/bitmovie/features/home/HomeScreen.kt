@@ -1,14 +1,19 @@
 package com.paulmaltsev.bitmovie.features.home
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,14 +22,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
+import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
+import com.paulmaltsev.bitmovie.features.home.components.MovieItem
+import com.paulmaltsev.bitmovie.features.home.viewModel.HomeViewModel
 
 @Composable
 fun HomeScreen(navController: NavController) {
+    val viewModel = viewModel<HomeViewModel>()
+    val movies = viewModel.movies.collectAsStateWithLifecycle(arrayListOf())
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,21 +51,27 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth(),
             contentScale = ContentScale.FillWidth
         )
-        Button(onClick = { navController.navigate(AppScreens.MovieCategory.route) }) {
-            Text(text = "Go to movie category")
-        }
-        Button(onClick = { navController.navigate(AppScreens.MovieDetails.route) }) {
-            Text(text = "Go to movie details")
-        }
-        Button(onClick = { navController.navigate(AppScreens.Favorites.route) }) {
-            Text(text = "Go to movie favorites")
-        }
-        Button(onClick = { navController.navigate(AppScreens.TmdbLegalContent.route) }) {
-            Text(text = "Go to tmdb")
-        }
 
         DataSourceLegend {
             navController.navigate(AppScreens.TmdbLegalContent.route)
+        }
+
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            contentPadding = PaddingValues(16.dp),
+        ) {
+            items(movies.value.size) {
+                val movie = movies.value[it]
+                MovieItem(
+                    movie = movie,
+                    modifier = Modifier
+                        .width(250.dp)
+                        .height(150.dp)
+                ) {
+                    Log.i("tester", "selected movie: $movie")
+                }
+            }
         }
     }
 }
@@ -66,4 +87,14 @@ private fun DataSourceLegend(onClick: VoidCallback) {
             .appPadding()
             .clickable(onClick = onClick)
     )
+}
+
+
+@Preview
+@Composable
+fun BeerItemPreview() {
+    BitMovieTheme {
+        val navController = rememberNavController()
+        HomeScreen(navController)
+    }
 }
