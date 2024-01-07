@@ -6,14 +6,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
+import com.paulmaltsev.bitmovie.core.ui.lifecycle.onResume
 import com.paulmaltsev.bitmovie.core.ui.views.AppTopBar
 import com.paulmaltsev.bitmovie.core.ui.views.MovieItem
 import com.paulmaltsev.bitmovie.features.favorites.viewModel.FavoritesViewModel
@@ -23,7 +24,12 @@ fun FavoritesScreen(
     navController: NavController,
     viewModel: FavoritesViewModel = viewModel()
 ) {
-    val movies = viewModel.movies.collectAsStateWithLifecycle().value
+    val movies = viewModel.movies.collectAsState().value
+
+    // After the user pops back from the movie details screen, the current list should be updated.
+    onResume {
+        viewModel.getFavoriteMovies()
+    }
 
     Scaffold(
         topBar = AppTopBar(

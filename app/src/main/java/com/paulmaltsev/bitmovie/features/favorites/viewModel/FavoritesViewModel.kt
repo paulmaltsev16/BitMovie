@@ -18,11 +18,7 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
     private var _movies = MutableStateFlow(arrayListOf<MovieModel>())
     val movies get() = _movies.asStateFlow()
 
-    init {
-        getFavoriteMovies()
-    }
-
-    private fun getFavoriteMovies() = viewModelScope.launch(Dispatchers.IO) {
+    fun getFavoriteMovies() = viewModelScope.launch(Dispatchers.IO) {
         val movies = favoriteRepository.getMoviesFromPreferences()
         _movies.emit(movies)
     }
