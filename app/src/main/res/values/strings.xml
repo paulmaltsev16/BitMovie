@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BitMovie</string>
+    <string name="content_description_tmdb_logo">The movie database logo</string>
+    <string name="data_provided_by_tmdb">Data provided by TMDB:</string>
+    <string name="tmdb_intro">The Movie Database (TMDB) is a community built movie and TV database. Every piece of data has been added by our amazing community dating back to 2008. TMDB\'s strong international focus and breadth of data is largely unmatched and something we\'re incredibly proud of. Put simply, we live and breathe community and that\'s precisely what makes us different.</string>
+    <string name="content_description_go_back_icon">Go back icon</string>
+    <string name="the_movie_database">The Movie Database</string>
 </resources>
