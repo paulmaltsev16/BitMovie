@@ -147,8 +147,8 @@ private fun MovieLazyList(
             MovieItem(
                 movie = movie,
                 modifier = Modifier
-                    .width(250.dp)
-                    .height(150.dp)
+                    .width(150.dp)
+                    .height(250.dp)
                     .fillMaxSize()
                     .height(IntrinsicSize.Max)
             ) {
