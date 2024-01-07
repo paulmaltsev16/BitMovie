@@ -25,14 +25,10 @@ class MovieDetailsViewModel(application: Application) : AndroidViewModel(applica
     private var _isFavoriteMovie = MutableStateFlow(false)
     val isFavoriteMovie get() = _isFavoriteMovie.asStateFlow()
 
-    fun getMovieDetailsById(id: String?) {
-        viewModelScope.launch(Dispatchers.IO) {
-            id ?: return@launch
-            movieRepository.getMovieDetailsById(id).let { movie ->
-                _movie.emit(movie)
-                updateIsFavoriteFlow()
-            }
-        }
+    fun getMovieDetailsById(id: String?) = viewModelScope.launch(Dispatchers.IO) {
+        val movie = movieRepository.getMovieDetailsById(id)
+        _movie.emit(movie)
+        updateIsFavoriteFlow()
     }
 
     fun updateFavoriteWithMovie() {

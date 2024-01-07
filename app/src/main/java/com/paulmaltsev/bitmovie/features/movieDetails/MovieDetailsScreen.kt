@@ -16,7 +16,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,6 +38,7 @@ import coil.compose.AsyncImage
 import com.paulmaltsev.bitmovie.BuildConfig
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
+import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.core.ui.views.AppSpacer
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 import com.paulmaltsev.bitmovie.features.movieDetails.viewModel.MovieDetailsViewModel
@@ -73,69 +73,24 @@ fun MovieDetailsScreen(
             }
         }
 
-        Column(
-            modifier = Modifier
-                .appPadding()
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = { viewModel.updateFavoriteWithMovie() }) {
-                    val icon = if (isFavoriteMovie) {
-                        Icons.Default.Favorite
-                    } else {
-                        Icons.Rounded.FavoriteBorder
-                    }
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = stringResource(id = R.string.content_description_favorite_icon),
-                        tint = Color.Black
-                    )
-                }
+        if (movie == null) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Text(
+                    text = stringResource(R.string.something_went_wrong_please_try_later),
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                )
             }
-
-            AppSpacer()
-
-            Text(
-                text = movie?.title ?: "-",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            AppSpacer()
-
-            Text(
-                text = "Original Title: ${movie?.originalTitle ?: "-"}",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Gray
-            )
-
-            AppSpacer(dimensionResource(id = R.dimen.padding_small))
-
-            Text(
-                text = "Release Date: ${movie?.releaseDate ?: "-"}",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Gray
-            )
-
-            AppSpacer()
-
-            Text(
-                text = movie?.overview ?: "-",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black
-            )
+        } else {
+            MovieDetails(movie = movie, isFavoriteMovie) {
+                viewModel.updateFavoriteWithMovie()
+            }
         }
     }
 }
 
 @Composable
-fun BackButton(onClick: VoidCallback) {
+private fun BackButton(onClick: VoidCallback) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -149,6 +104,72 @@ fun BackButton(onClick: VoidCallback) {
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = stringResource(id = R.string.content_description_go_back_icon),
             tint = Color.Black,
+        )
+    }
+}
+
+@Composable
+private fun MovieDetails(
+    movie: MovieModel,
+    isFavoriteMovie: Boolean,
+    onFavoriteIconClick: VoidCallback
+) {
+    Column(
+        modifier = Modifier
+            .appPadding()
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = onFavoriteIconClick) {
+                val icon = if (isFavoriteMovie) {
+                    Icons.Default.Favorite
+                } else {
+                    Icons.Rounded.FavoriteBorder
+                }
+                Icon(
+                    imageVector = icon,
+                    contentDescription = stringResource(id = R.string.content_description_favorite_icon),
+                    tint = Color.Black
+                )
+            }
+        }
+
+        AppSpacer()
+
+        Text(
+            text = movie.title ?: "-",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        AppSpacer()
+
+        Text(
+            text = "Original Title: ${movie.originalTitle ?: "-"}",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            color = Color.Gray
+        )
+
+        AppSpacer(dimensionResource(id = R.dimen.padding_small))
+
+        Text(
+            text = "Release Date: ${movie.releaseDate ?: "-"}",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            color = Color.Gray
+        )
+
+        AppSpacer()
+
+        Text(
+            text = movie.overview ?: "-",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            color = Color.Black
         )
     }
 }

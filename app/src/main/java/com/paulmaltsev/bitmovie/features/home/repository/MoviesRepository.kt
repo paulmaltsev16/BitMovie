@@ -21,7 +21,8 @@ class MoviesRepository(
         }
     }
 
-    suspend fun getMovieDetailsById(id: String): MovieModel? {
+    suspend fun getMovieDetailsById(id: String?): MovieModel? {
+        id ?: return null
         return try {
             val api = client.instance.create(MoviesApi::class.java)
             val result = api.getMovieDetails(id)

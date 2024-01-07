@@ -14,4 +14,5 @@
     <string name="upcoming">Upcoming\n</string>
     <string name="top_rated">Top rated\n</string>
     <string name="now_playing">Now playing\n</string>
+    <string name="something_went_wrong_please_try_later">Something went wrong please try later</string>
 </resources>
