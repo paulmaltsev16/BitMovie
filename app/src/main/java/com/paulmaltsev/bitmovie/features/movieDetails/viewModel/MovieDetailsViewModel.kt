@@ -5,9 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulmaltsev.bitmovie.core.data.constants.Constants
 import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
-import com.paulmaltsev.bitmovie.core.data.remote.api.MoviesApi
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.features.favorites.repository.FavoriteRepository
+import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +17,7 @@ class MovieDetailsViewModel(application: Application) : AndroidViewModel(applica
 
     private val preferences = application.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME, 0)
     private val favoriteRepository = FavoriteRepository(preferences)
+    private val movieRepository = MoviesRepository(RetrofitClient)
 
     private var _movie = MutableStateFlow<MovieModel?>(null)
     val movie get() = _movie.asStateFlow()
@@ -27,9 +28,7 @@ class MovieDetailsViewModel(application: Application) : AndroidViewModel(applica
     fun getMovieDetailsById(id: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             id ?: return@launch
-            val api = RetrofitClient.instance.create(MoviesApi::class.java)
-            val result = api.getMovieDetails(id)
-            result.body()?.let { movie ->
+            movieRepository.getMovieDetailsById(id).let { movie ->
                 _movie.emit(movie)
                 updateIsFavoriteFlow()
             }

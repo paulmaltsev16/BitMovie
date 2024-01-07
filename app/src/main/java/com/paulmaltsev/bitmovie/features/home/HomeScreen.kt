@@ -42,9 +42,12 @@ import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 import com.paulmaltsev.bitmovie.features.home.viewModel.HomeViewModel
 
 @Composable
-fun HomeScreen(navController: NavController) {
-    val viewModel = viewModel<HomeViewModel>()
+fun HomeScreen(
+    navController: NavController,
+    viewModel: HomeViewModel = viewModel()
+) {
     val movies = viewModel.movies.collectAsStateWithLifecycle(arrayListOf())
+
     Column(
         modifier = Modifier
             .fillMaxSize()

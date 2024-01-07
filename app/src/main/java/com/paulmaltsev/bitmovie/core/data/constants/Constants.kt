@@ -11,3 +11,11 @@ class SharedPrefKeys {
         const val FAVORITE_MOVIES = "favorite_movies"
     }
 }
+
+class MoviesCollections {
+    companion object {
+        const val UPCOMING = "upcoming"
+        const val TOP_RATED = "top_rated"
+        const val NOW_PLAYING = "now_playing"
+    }
+}
