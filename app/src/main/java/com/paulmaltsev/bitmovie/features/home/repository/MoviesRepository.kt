@@ -1,6 +1,7 @@
 package com.paulmaltsev.bitmovie.features.home.repository
 
 import android.util.Log
+import com.paulmaltsev.bitmovie.core.data.constants.MoviesCollectionType
 import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
 import com.paulmaltsev.bitmovie.core.data.remote.api.MoviesApi
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
@@ -8,15 +9,15 @@ import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 private const val TAG = "MoviesRepository"
 
 interface MoviesRepository {
-    suspend fun downloadMovies(movieCollection: String, page: Int): ArrayList<MovieModel>
+    suspend fun downloadMovies(movieCollection: MoviesCollectionType, page: Int): ArrayList<MovieModel>
     suspend fun getMovieDetailsById(id: String?): MovieModel?
 }
 
 class MoviesRepositoryImpl(private val client: RetrofitClient) : MoviesRepository {
-    override suspend fun downloadMovies(movieCollection: String, page: Int): ArrayList<MovieModel> {
+    override suspend fun downloadMovies(movieCollection: MoviesCollectionType, page: Int): ArrayList<MovieModel> {
         return try {
             val api = client.instance.create(MoviesApi::class.java)
-            val result = api.getMovies(movieCollection, page)
+            val result = api.getMovies(movieCollection.collectionName, page)
             result?.body()?.movies ?: arrayListOf()
         } catch (e: Exception) {
             Log.e(TAG, "downloadMovies, failed: ", e)

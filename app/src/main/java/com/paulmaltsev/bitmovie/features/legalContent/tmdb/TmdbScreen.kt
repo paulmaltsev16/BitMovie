@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +26,7 @@ import com.paulmaltsev.bitmovie.core.ui.views.AppTopBar
  * According to the documentation, TMDB provides dates for free. The service only requires
  * contribution it as a data source.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TmdbScreen(navController: NavController) {
     Scaffold(

@@ -35,10 +35,10 @@ fun AppNavigation(
         composable(AppScreens.Menu.route) {
             MenuScreen(navController)
         }
-        composable(AppScreens.Category.route + "/" + "{screenTitleId}") {
+        composable(AppScreens.Category.route + "/" + "{collectionType}") {
             // It can crash, but we want to know if something is wrong earlier as possible.
-            val screenTitleId = it.arguments?.getString("screenTitleId")?.toInt()
-            MovieCategoryScreen(screenTitleId!!, navController)
+            val collectionType = it.arguments?.getString("collectionType")?.toInt()
+            MovieCategoryScreen(collectionType!!, navController)
         }
     }
 }

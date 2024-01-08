@@ -2,7 +2,7 @@ package com.paulmaltsev.bitmovie.features.home.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paulmaltsev.bitmovie.core.data.constants.MoviesCollections
+import com.paulmaltsev.bitmovie.core.data.constants.MoviesCollectionType
 import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepository
@@ -39,22 +39,22 @@ class HomeViewModel : ViewModel() {
         val result = listOf(
             async {
                 val upcoming = moviesRepository.downloadMovies(
-                    MoviesCollections.UPCOMING,
+                    MoviesCollectionType.UPCOMING,
                     upcomingCurrentPage
                 )
                 _moviesUpcoming.emit(upcoming)
             },
             async {
                 val topRated = moviesRepository.downloadMovies(
-                    MoviesCollections.TOP_RATED,
-                    1
+                    MoviesCollectionType.TOP_RATED,
+                    topRatedCurrentPage
                 )
                 _moviesTopRated.emit(topRated)
             },
             async {
                 val nowPlaying = moviesRepository.downloadMovies(
-                    MoviesCollections.NOW_PLAYING,
-                    1
+                    MoviesCollectionType.NOW_PLAYING,
+                    nowPlayingCurrentPage
                 )
                 _moviesNowPlaying.emit(nowPlaying)
             }
@@ -65,7 +65,7 @@ class HomeViewModel : ViewModel() {
     fun loadNextUpcomingMovies() = viewModelScope.launch {
         upcomingCurrentPage += 1
         val movies = moviesRepository.downloadMovies(
-            MoviesCollections.UPCOMING, upcomingCurrentPage
+            MoviesCollectionType.UPCOMING, upcomingCurrentPage
         )
         val list = moviesUpcoming.value + movies
         _moviesUpcoming.emit(ArrayList(list))
@@ -74,7 +74,7 @@ class HomeViewModel : ViewModel() {
     fun loadNextTopRatedMovies() = viewModelScope.launch {
         upcomingCurrentPage += 1
         val movies = moviesRepository.downloadMovies(
-            MoviesCollections.TOP_RATED, topRatedCurrentPage
+            MoviesCollectionType.TOP_RATED, topRatedCurrentPage
         )
         val list = moviesTopRated.value + movies
         _moviesTopRated.emit(ArrayList(list))
@@ -83,7 +83,7 @@ class HomeViewModel : ViewModel() {
     fun loadNextNowPlayingMovies() = viewModelScope.launch {
         nowPlayingCurrentPage += 1
         val movies = moviesRepository.downloadMovies(
-            MoviesCollections.NOW_PLAYING, nowPlayingCurrentPage
+            MoviesCollectionType.NOW_PLAYING, nowPlayingCurrentPage
         )
         val list = moviesNowPlaying.value + movies
         _moviesNowPlaying.emit(ArrayList(list))

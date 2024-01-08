@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.R
+import com.paulmaltsev.bitmovie.core.data.constants.MoviesCollectionType
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
 import com.paulmaltsev.bitmovie.features.home.components.MovieListSection
@@ -51,7 +52,7 @@ fun HomeScreen(
             titleId = R.string.upcoming,
             navController = navController,
             onSeeMoreClicked = {
-                navController.navigate(AppScreens.Category.route + "/" + R.string.upcoming)
+                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.UPCOMING.ordinal)
             },
             onReachEnd = {
                 viewModel.loadNextUpcomingMovies()
@@ -63,7 +64,7 @@ fun HomeScreen(
             titleId = R.string.top_rated,
             navController = navController,
             onSeeMoreClicked = {
-                navController.navigate(AppScreens.Category.route + "/" + R.string.top_rated)
+                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.TOP_RATED.ordinal)
             },
             onReachEnd = {
                 viewModel.loadNextTopRatedMovies()
@@ -75,7 +76,7 @@ fun HomeScreen(
             titleId = R.string.now_playing,
             navController = navController,
             onSeeMoreClicked = {
-                navController.navigate(AppScreens.Category.route + "/" + R.string.now_playing)
+                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.NOW_PLAYING.ordinal)
             },
             onReachEnd = {
                 viewModel.loadNextNowPlayingMovies()
