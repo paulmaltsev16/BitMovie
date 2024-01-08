@@ -1,5 +1,6 @@
 package com.paulmaltsev.bitmovie.features.home.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,6 +35,7 @@ fun MovieListSection(
     movies: ArrayList<MovieModel>,
     titleId: Int,
     navController: NavController,
+    onSeeMoreClicked: VoidCallback,
     onReachEnd: VoidCallback
 ) {
     Row(
@@ -47,12 +49,14 @@ fun MovieListSection(
             )
     ) {
         MovieCollectionTitle(stringResource(id = titleId))
+
         Text(
             text = "see more",
             color = colorResource(id = R.color.main),
             modifier = Modifier
                 .fillMaxHeight()
                 .align(Alignment.CenterVertically)
+                .clickable(onClick = onSeeMoreClicked)
         )
     }
 
@@ -93,8 +97,8 @@ fun BeerItemPreview() {
             )
         ),
         titleId = R.string.app_name,
-        navController = navController
-    ) {
-
-    }
+        navController = navController,
+        onSeeMoreClicked = {},
+        onReachEnd = {}
+    )
 }

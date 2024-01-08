@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.R
+import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
 import com.paulmaltsev.bitmovie.features.home.components.MovieListSection
 import com.paulmaltsev.bitmovie.features.home.viewModel.HomeViewModel
@@ -48,26 +49,38 @@ fun HomeScreen(
         MovieListSection(
             movies = moviesUpcoming.value,
             titleId = R.string.upcoming,
-            navController = navController
-        ) {
-            viewModel.loadNextUpcomingMovies()
-        }
+            navController = navController,
+            onSeeMoreClicked = {
+                navController.navigate(AppScreens.Category.route + "/" + R.string.upcoming)
+            },
+            onReachEnd = {
+                viewModel.loadNextUpcomingMovies()
+            }
+        )
 
         MovieListSection(
             movies = moviesTopRated.value,
             titleId = R.string.top_rated,
-            navController = navController
-        ) {
-            viewModel.loadNextTopRatedMovies()
-        }
+            navController = navController,
+            onSeeMoreClicked = {
+                navController.navigate(AppScreens.Category.route + "/" + R.string.top_rated)
+            },
+            onReachEnd = {
+                viewModel.loadNextTopRatedMovies()
+            }
+        )
 
         MovieListSection(
             movies = moviesNowPlaying.value,
             titleId = R.string.now_playing,
-            navController = navController
-        ) {
-            viewModel.loadNextNowPlayingMovies()
-        }
+            navController = navController,
+            onSeeMoreClicked = {
+                navController.navigate(AppScreens.Category.route + "/" + R.string.now_playing)
+            },
+            onReachEnd = {
+                viewModel.loadNextNowPlayingMovies()
+            }
+        )
     }
 }
 
