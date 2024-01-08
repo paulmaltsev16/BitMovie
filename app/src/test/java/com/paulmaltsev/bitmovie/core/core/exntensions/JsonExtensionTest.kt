@@ -1,3 +1,5 @@
+package com.paulmaltsev.bitmovie.core.core.exntensions;
+
 import com.google.gson.Gson
 import com.paulmaltsev.bitmovie.core.extensions.fromJson
 import com.paulmaltsev.bitmovie.core.extensions.toJson
