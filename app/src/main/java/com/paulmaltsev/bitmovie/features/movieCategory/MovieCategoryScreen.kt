@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import com.paulmaltsev.bitmovie.core.data.constants.MoviesCollectionType
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
+import com.paulmaltsev.bitmovie.core.ui.views.AppPlaceholder
 import com.paulmaltsev.bitmovie.core.ui.views.AppTopBar
 import com.paulmaltsev.bitmovie.core.ui.views.MovieItem
 import com.paulmaltsev.bitmovie.features.movieCategory.viewModel.MovieCategoryViewModel
@@ -32,9 +33,6 @@ fun MovieCategoryScreen(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val viewModel = viewModel<MovieCategoryViewModel>()
     val movies = viewModel.movies.collectAsStateWithLifecycle().value
-    LaunchedEffect(key1 = true) {
-        viewModel.downloadMovies(movieCollectionType)
-    }
 
     Scaffold(
         topBar = AppTopBar(
@@ -44,12 +42,17 @@ fun MovieCategoryScreen(
             navController.popBackStack()
         }
     ) { paddingValues ->
+
+        if (movies.isEmpty()) {
+            AppPlaceholder()
+        }
+
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 128.dp),
             modifier = Modifier
                 .padding(paddingValues)
-                .fillMaxSize()
-                .appPadding(),
+                .appPadding()
+                .fillMaxSize(),
         ) {
             items(
                 count = movies.size
