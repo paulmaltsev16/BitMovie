@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -35,8 +34,7 @@ fun MovieListSection(
     movies: ArrayList<MovieModel>,
     titleId: Int,
     navController: NavController,
-    onSeeMoreClicked: VoidCallback,
-    onReachEnd: VoidCallback
+    onSeeMoreClicked: VoidCallback
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -78,11 +76,6 @@ fun MovieListSection(
                 navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)
             }
         }
-        item {
-            LaunchedEffect(true) {
-                onReachEnd()
-            }
-        }
     }
 }
 
@@ -98,7 +91,6 @@ fun BeerItemPreview() {
         ),
         titleId = R.string.app_name,
         navController = navController,
-        onSeeMoreClicked = {},
-        onReachEnd = {}
+        onSeeMoreClicked = {}
     )
 }

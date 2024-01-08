@@ -50,38 +50,26 @@ fun HomeScreen(
         MovieListSection(
             movies = moviesUpcoming.value,
             titleId = R.string.upcoming,
-            navController = navController,
-            onSeeMoreClicked = {
-                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.UPCOMING.ordinal)
-            },
-            onReachEnd = {
-                viewModel.loadNextUpcomingMovies()
-            }
-        )
+            navController = navController
+        ) {
+            navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.UPCOMING.ordinal)
+        }
 
         MovieListSection(
             movies = moviesTopRated.value,
             titleId = R.string.top_rated,
-            navController = navController,
-            onSeeMoreClicked = {
-                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.TOP_RATED.ordinal)
-            },
-            onReachEnd = {
-                viewModel.loadNextTopRatedMovies()
-            }
-        )
+            navController = navController
+        ) {
+            navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.TOP_RATED.ordinal)
+        }
 
         MovieListSection(
             movies = moviesNowPlaying.value,
             titleId = R.string.now_playing,
-            navController = navController,
-            onSeeMoreClicked = {
-                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.NOW_PLAYING.ordinal)
-            },
-            onReachEnd = {
-                viewModel.loadNextNowPlayingMovies()
-            }
-        )
+            navController = navController
+        ) {
+            navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.NOW_PLAYING.ordinal)
+        }
     }
 }
 
