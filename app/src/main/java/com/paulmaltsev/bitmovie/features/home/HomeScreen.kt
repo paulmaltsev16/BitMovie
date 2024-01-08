@@ -18,8 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,6 +42,7 @@ import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
+import com.paulmaltsev.bitmovie.core.ui.views.AppIconButton
 import com.paulmaltsev.bitmovie.core.ui.views.MovieItem
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 import com.paulmaltsev.bitmovie.features.home.viewModel.HomeViewModel
@@ -71,14 +70,8 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            IconButton(
-                onClick = { navController.navigate(AppScreens.Favorites.route) },
-                modifier = Modifier.align(Alignment.TopEnd)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = stringResource(id = R.string.content_description_favorite_icon)
-                )
+            AppIconButton(Icons.Default.Favorite) {
+                navController.navigate(AppScreens.Favorites.route)
             }
         }
 
@@ -144,7 +137,7 @@ private fun MovieLazyList(
             MovieItem(
                 movie = movie,
                 modifier = Modifier
-                    .width(150.dp)
+                    .width(170.dp)
                     .height(250.dp)
                     .fillMaxSize()
                     .height(IntrinsicSize.Max)

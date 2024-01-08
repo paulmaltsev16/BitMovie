@@ -18,4 +18,5 @@
     <string name="rating">Rating: %s</string>
     <string name="release_date">Release data: %s</string>
     <string name="original_title">Original title: %s</string>
+    <string name="content_description_app_icon">App icon</string>
 </resources>

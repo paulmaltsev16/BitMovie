@@ -48,7 +48,7 @@ fun FavoritesScreen(
                     movie = movie,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(1f)
+                        .aspectRatio(0.8f)
                         .appPadding()
                 ) {
                     navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)

@@ -1,7 +1,5 @@
 package com.paulmaltsev.bitmovie.features.movieDetails
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,9 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -23,13 +19,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -39,6 +33,7 @@ import com.paulmaltsev.bitmovie.BuildConfig
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
+import com.paulmaltsev.bitmovie.core.ui.views.AppIconButton
 import com.paulmaltsev.bitmovie.core.ui.views.AppSpacer
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 import com.paulmaltsev.bitmovie.features.movieDetails.viewModel.MovieDetailsViewModel
@@ -65,10 +60,10 @@ fun MovieDetailsScreen(
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(0.9f),
+                    .aspectRatio(0.7f),
             )
 
-            BackButton {
+            AppIconButton(Icons.AutoMirrored.Filled.ArrowBack) {
                 navController.popBackStack()
             }
         }
@@ -86,25 +81,6 @@ fun MovieDetailsScreen(
                 viewModel.updateFavoriteWithMovie()
             }
         }
-    }
-}
-
-@Composable
-private fun BackButton(onClick: VoidCallback) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .appPadding()
-            .size(48.dp)
-            .clip(RoundedCornerShape(28.dp))
-            .background(Color.White)
-            .clickable(onClick = onClick),
-    ) {
-        Icon(
-            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = stringResource(id = R.string.content_description_go_back_icon),
-            tint = Color.Black,
-        )
     }
 }
 
