@@ -8,8 +8,8 @@ import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
 import com.paulmaltsev.bitmovie.features.favorites.repository.FavoriteRepository
 import com.paulmaltsev.bitmovie.features.favorites.repository.FavoriteRepositoryImpl
-import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepository
-import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepositoryImpl
+import com.paulmaltsev.bitmovie.core.repositories.MoviesRepository
+import com.paulmaltsev.bitmovie.core.repositories.MoviesRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

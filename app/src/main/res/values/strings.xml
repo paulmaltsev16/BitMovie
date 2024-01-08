@@ -24,4 +24,7 @@
     <string name="content_description_bottom_navigation_icon">Bottom navigation icon</string>
     <string name="app_intro">The application downloads a list of movies from The Movie Database API and displays it in different categories. You can check movie details by clicking on its poster or add a movie to the favorites.</string>
     <string name="category">Category</string>
+    <string name="preview">Preview</string>
+    <string name="loading">loading</string>
+    <string name="close">close</string>
 </resources>

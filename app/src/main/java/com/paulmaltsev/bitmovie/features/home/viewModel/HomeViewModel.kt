@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.paulmaltsev.bitmovie.core.data.constants.MoviesCollectionType
 import com.paulmaltsev.bitmovie.core.data.remote.RetrofitClient
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
-import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepository
-import com.paulmaltsev.bitmovie.features.home.repository.MoviesRepositoryImpl
+import com.paulmaltsev.bitmovie.core.repositories.MoviesRepository
+import com.paulmaltsev.bitmovie.core.repositories.MoviesRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

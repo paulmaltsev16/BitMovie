@@ -5,6 +5,7 @@ import com.paulmaltsev.bitmovie.R
 class Constants {
     companion object {
         const val SHARED_PREFERENCES_NAME = "movies_shared_preferences"
+        const val YOU_TUBE_BAS_PREVIEW_URL = "https://www.youtube.com/watch?v=%s"
     }
 }
 
