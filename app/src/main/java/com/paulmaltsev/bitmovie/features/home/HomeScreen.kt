@@ -19,9 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.R
-import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
-import com.paulmaltsev.bitmovie.features.home.components.DataSourceLegend
 import com.paulmaltsev.bitmovie.features.home.components.MovieListSection
 import com.paulmaltsev.bitmovie.features.home.viewModel.HomeViewModel
 
@@ -46,10 +44,6 @@ fun HomeScreen(
             contentScale = ContentScale.FillWidth,
             modifier = Modifier.fillMaxWidth()
         )
-
-        DataSourceLegend {
-            navController.navigate(AppScreens.TmdbLegalContent.route)
-        }
 
         MovieListSection(
             movies = moviesUpcoming.value,

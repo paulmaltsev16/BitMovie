@@ -19,4 +19,8 @@
     <string name="release_date">Release data: %s</string>
     <string name="original_title">Original title: %s</string>
     <string name="content_description_app_icon">App icon</string>
+    <string name="home">Home</string>
+    <string name="menu">Menu</string>
+    <string name="content_description_bottom_navigation_icon">Bottom navigation icon</string>
+    <string name="app_intro">The application downloads a list of movies from The Movie Database API and displays it in different categories. You can check movie details by clicking on its poster or add a movie to the favorites.</string>
 </resources>

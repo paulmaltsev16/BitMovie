@@ -7,8 +7,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +30,9 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.core.managers.ConnectionStatusManager
 import com.paulmaltsev.bitmovie.core.managers.ConnectionStatusManagerImpl
+import com.paulmaltsev.bitmovie.core.navigation.AppBottomNavigationBar
 import com.paulmaltsev.bitmovie.core.navigation.AppNavigation
+import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
 
 class MainActivity : ComponentActivity() {
@@ -49,12 +53,22 @@ class MainActivity : ComponentActivity() {
             BitMovieTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
-                    if (connectionStatus == ConnectionStatusManager.Status.LOST) {
-                        LostConnectionMessage()
+                    Scaffold(
+                        bottomBar = AppBottomNavigationBar(
+                            navController,
+                            listOf(AppScreens.Home, AppScreens.Favorites, AppScreens.Menu)
+                        )
+                    ) {
+                        if (connectionStatus == ConnectionStatusManager.Status.LOST) {
+                            LostConnectionMessage()
+                        }
+                        AppNavigation(
+                            navController = navController,
+                            modifier = Modifier.padding(it)
+                        )
                     }
-                    AppNavigation(navController = navController)
                 }
             }
         }

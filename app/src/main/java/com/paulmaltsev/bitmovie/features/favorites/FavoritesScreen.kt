@@ -9,13 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.extensions.appPadding
 import com.paulmaltsev.bitmovie.core.navigation.AppScreens
-import com.paulmaltsev.bitmovie.core.ui.views.AppTopBar
 import com.paulmaltsev.bitmovie.core.ui.views.MovieItem
 import com.paulmaltsev.bitmovie.features.favorites.viewModel.FavoritesViewModel
 
@@ -31,13 +28,7 @@ fun FavoritesScreen(
         viewModel.getFavoriteMovies()
     }
 
-    Scaffold(
-        topBar = AppTopBar(
-            title = stringResource(id = R.string.favorites)
-        ) {
-            navController.popBackStack()
-        }
-    ) {
+    Scaffold {
         LazyColumn(
             modifier = Modifier
                 .padding(it)
