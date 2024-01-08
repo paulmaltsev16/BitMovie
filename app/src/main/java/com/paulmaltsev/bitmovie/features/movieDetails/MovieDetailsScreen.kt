@@ -13,14 +13,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -99,18 +98,11 @@ private fun MovieDetails(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = onFavoriteIconClick) {
-                val icon = if (isFavoriteMovie) {
-                    Icons.Default.Favorite
-                } else {
-                    Icons.Rounded.FavoriteBorder
-                }
-                Icon(
-                    imageVector = icon,
-                    contentDescription = stringResource(id = R.string.content_description_favorite_icon),
-                    tint = Color.Black
-                )
-            }
+            val icon = if (isFavoriteMovie) Icons.Default.Favorite else Icons.Rounded.FavoriteBorder
+            AppIconButton(
+                imageVector = icon,
+                onClick = onFavoriteIconClick
+            )
         }
 
         AppSpacer()
@@ -155,7 +147,7 @@ private fun MovieDetails(
             text = movie.overview ?: "-",
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
-            color = Color.Black
+            color = colorResource(id = R.color.large_text_color)
         )
     }
 }

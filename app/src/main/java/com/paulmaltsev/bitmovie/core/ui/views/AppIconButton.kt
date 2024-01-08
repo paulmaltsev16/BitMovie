@@ -21,7 +21,9 @@ import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 @Composable
 fun AppIconButton(
     imageVector: ImageVector,
-    onClick: VoidCallback
+    backgroundColor: Color = Color.White,
+    foregroundColor: Color = Color.Black,
+    onClick: VoidCallback,
 ) {
     Box(
         contentAlignment = Alignment.Center,
@@ -29,13 +31,13 @@ fun AppIconButton(
             .appPadding()
             .size(48.dp)
             .clip(RoundedCornerShape(28.dp))
-            .background(Color.White)
+            .background(backgroundColor)
             .clickable(onClick = onClick),
     ) {
         Icon(
             imageVector = imageVector,
             contentDescription = stringResource(id = R.string.content_description_app_icon),
-            tint = Color.Black,
+            tint = foregroundColor,
         )
     }
 }
