@@ -17,6 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -27,6 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.zIndex
 import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.core.managers.ConnectionStatusManager
 import com.paulmaltsev.bitmovie.core.managers.ConnectionStatusManagerImpl
@@ -37,6 +42,7 @@ import com.paulmaltsev.bitmovie.core.ui.theme.BitMovieTheme
 
 class MainActivity : ComponentActivity() {
 
+    private val rootScreens = listOf(AppScreens.Home, AppScreens.Favorites, AppScreens.Menu)
     private val connectionStatusManager: ConnectionStatusManager by lazy {
         ConnectionStatusManagerImpl(applicationContext)
     }
@@ -46,6 +52,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             setStatusBarColor()
             val navController = rememberNavController()
+            var showBottomBar by rememberSaveable { mutableStateOf(true) }
+            showBottomBar = isShowBottomNavBar(navController)
             val connectionStatus by connectionStatusManager.observe().collectAsState(
                 initial = ConnectionStatusManager.Status.LOST
             )
@@ -56,10 +64,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     Scaffold(
-                        bottomBar = AppBottomNavigationBar(
-                            navController,
-                            listOf(AppScreens.Home, AppScreens.Favorites, AppScreens.Menu)
-                        )
+                        bottomBar = {
+                            if (showBottomBar) AppBottomNavigationBar(navController, rootScreens)
+                        }
                     ) {
                         if (connectionStatus == ConnectionStatusManager.Status.LOST) {
                             LostConnectionMessage()
@@ -83,6 +90,14 @@ class MainActivity : ComponentActivity() {
                 it.statusBarColor = statusBarColor.toArgb()
             }
         }
+    }
+
+    @Composable
+    private fun isShowBottomNavBar(navController: NavController): Boolean {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+        val screen = rootScreens.firstOrNull { it.route == currentRoute }
+        return screen != null
     }
 }
 

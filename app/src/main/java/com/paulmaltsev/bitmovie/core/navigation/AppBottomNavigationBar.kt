@@ -19,7 +19,7 @@ import com.paulmaltsev.bitmovie.core.utils.ComposableVoidCallback
 fun AppBottomNavigationBar(
     navController: NavController,
     screens: List<AppScreens>
-): ComposableVoidCallback = {
+) {
     var selectedItem by remember { mutableStateOf(0) }
     var currentRoute by remember { mutableStateOf(AppScreens.Home.route) }
 
