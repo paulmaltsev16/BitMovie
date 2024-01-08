@@ -48,6 +48,7 @@ to speed up development and improve the code's readability.
 7. Because there is shared preference to store favorites, there are performance issues.
 8. Use Dagger Hilt for dependency injection.
 9. After screen rotate scroll state should be store for better user experience.
+10. Requires additional setup to support dark mode.
 
 Screenshots:
 
