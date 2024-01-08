@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.utils.ComposableVoidCallback
 
@@ -21,8 +22,10 @@ fun AppBottomNavigationBar(
     screens: List<AppScreens>
 ) {
     var selectedItem by remember { mutableStateOf(0) }
-    var currentRoute by remember { mutableStateOf(AppScreens.Home.route) }
 
+    // Looking for the selectedItem according to the last destination route.
+    val navBackStackEntry by (navController.currentBackStackEntryAsState())
+    val currentRoute = navBackStackEntry?.destination?.route
     screens.forEachIndexed { index, navigationItem ->
         if (navigationItem.route == currentRoute) {
             selectedItem = index
@@ -38,7 +41,6 @@ fun AppBottomNavigationBar(
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
-                    currentRoute = item.route
                     navController.navigate(item.route) {
                         navController.graph.startDestinationRoute?.let { route ->
                             popUpTo(route) {
