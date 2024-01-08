@@ -27,6 +27,7 @@ to speed up development and improve the code's readability.
 7. Write Unit Tests
 8. Provide a clear user experience when there is no internet connection.
 9. Follow HIG for iOS and Matirial Design for Android
+10. Supports dark mode
 
 ### Requires additional research
 
@@ -45,17 +46,40 @@ to speed up development and improve the code's readability.
    movie details.
 5. On image click, open the full-size image with zoom options.
 6. Favorite movies have to be stored on a remote source that requires user authentication.
-7. Because there is shared preference to store favorites, there are performance issues.
 8. Use Dagger Hilt for dependency injection.
 9. After screen rotate scroll state should be store for better user experience.
-10. Requires additional setup to support dark mode.
 
 Screenshots:
 
 <div align="center">
-<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/3dbc3145-ca35-4b13-9ea2-161e17e64e75" alt="Screenshor_1" width="150" height="300">
-<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/08938293-db49-4fd4-bca8-0d137e23c630" alt="Screenshor_1" width="150" height="300">
-<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/030cb9be-ba07-4f88-903b-1a78d84835c0" alt="Screenshor_1" width="150" height="300">
-<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/306dda44-fc38-4da9-9128-0a8167524084" alt="Screenshor_1" width="150" height="300">
-<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/05da2bca-26d8-4955-8379-80c17c8d24fd" alt="Screenshor_1" width="150" height="300">
+
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/3852c635-cbfa-49b0-96ca-b5f40e219b40" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/c0b05ab1-507a-4483-9406-2e5780faef3b" alt="Screenshor_1" width="150" height="300">
+
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/ee97bb64-0769-4ceb-b114-5e80670d46d2" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/bebaa898-cdee-43d1-bafa-6be75d2b305b" alt="Screenshor_1" width="150" height="300">
+
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/f092b7de-1325-4f52-b307-6e5a75a17471" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/dc3f8ec1-b60a-483e-a309-b38216aa9e2d" alt="Screenshor_1" width="150" height="300">
+
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/95b38f3a-e645-46c3-8c14-0eb96e6001e5" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/3aca54fd-b223-4c8c-b38e-b1e2077cb9a7" alt="Screenshor_1" width="150" height="300">
+
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/464e1a41-9223-4b0d-9de1-2a714eff778a" alt="Screenshor_1" width="150" height="300">
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/56b431b7-28d8-486d-9305-0cea0b02a603" alt="Screenshor_1" width="150" height="300">
+
+<img src="https://github.com/paulmaltsev16/BitMovie/assets/38934377/d3354ffa-aadf-48e6-ad16-d76638999cdc" alt="Screenshor_1" width="150" height="300">
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
