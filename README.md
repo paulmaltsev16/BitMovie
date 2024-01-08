@@ -47,6 +47,7 @@ to speed up development and improve the code's readability.
 6. Favorite movies have to be stored on a remote source that requires user authentication.
 7. Because there is shared preference to store favorites, there are performance issues.
 8. Use Dagger Hilt for dependency injection.
+9. After screen rotate scroll state should be store for better user experience.
 
 Screenshots:
 
