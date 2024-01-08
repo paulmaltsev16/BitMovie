@@ -20,8 +20,9 @@ interface ConnectionStatusManager {
 
 class ConnectionStatusManagerImpl(context: Context) : ConnectionStatusManager {
 
-    private val connectivityManager =
+    private val connectivityManager: ConnectivityManager by lazy {
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    }
 
     override fun observe(): Flow<ConnectionStatusManager.Status> {
         return callbackFlow {

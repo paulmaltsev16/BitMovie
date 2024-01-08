@@ -86,18 +86,27 @@ fun HomeScreen(
             navController.navigate(AppScreens.TmdbLegalContent.route)
         }
 
-        MovieCollectionName(stringResource(id = R.string.upcoming))
-        MovieLazyList(moviesUpcoming.value, navController) {
+        MovieLazyList(
+            movies = moviesUpcoming.value,
+            titleId = R.string.upcoming,
+            navController = navController
+        ) {
             viewModel.loadNextUpcomingMovies()
         }
 
-        MovieCollectionName(stringResource(id = R.string.top_rated))
-        MovieLazyList(moviesTopRated.value, navController) {
+        MovieLazyList(
+            movies = moviesTopRated.value,
+            titleId = R.string.top_rated,
+            navController = navController
+        ) {
             viewModel.loadNextTopRatedMovies()
         }
 
-        MovieCollectionName(stringResource(id = R.string.now_playing))
-        MovieLazyList(moviesNowPlaying.value, navController) {
+        MovieLazyList(
+            movies = moviesNowPlaying.value,
+            titleId = R.string.now_playing,
+            navController = navController
+        ) {
             viewModel.loadNextNowPlayingMovies()
         }
     }
@@ -117,26 +126,14 @@ private fun DataSourceLegend(onClick: VoidCallback) {
 }
 
 @Composable
-private fun MovieCollectionName(name: String) {
-    Text(
-        text = name,
-        color = colorResource(id = R.color.blue_main),
-        fontWeight = FontWeight.Bold,
-        fontSize = 30.sp,
-        modifier = Modifier.padding(
-            start = dimensionResource(id = R.dimen.padding_standard),
-            end = dimensionResource(id = R.dimen.padding_standard),
-            top = dimensionResource(id = R.dimen.padding_big),
-        )
-    )
-}
-
-@Composable
 private fun MovieLazyList(
     movies: ArrayList<MovieModel>,
+    titleId: Int,
     navController: NavController,
     onReachEnd: VoidCallback
 ) {
+    MovieCollectionName(stringResource(id = titleId))
+
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -163,6 +160,20 @@ private fun MovieLazyList(
     }
 }
 
+@Composable
+private fun MovieCollectionName(name: String) {
+    Text(
+        text = name,
+        color = colorResource(id = R.color.blue_main),
+        fontWeight = FontWeight.Bold,
+        fontSize = 30.sp,
+        modifier = Modifier.padding(
+            start = dimensionResource(id = R.dimen.padding_standard),
+            end = dimensionResource(id = R.dimen.padding_standard),
+            top = dimensionResource(id = R.dimen.padding_big),
+        )
+    )
+}
 
 @Preview
 @Composable

@@ -42,8 +42,8 @@ fun FavoritesScreen(
             modifier = Modifier
                 .padding(it)
         ) {
-            items(movies.size) {
-                val movie = movies[it]
+            items(movies.size) { index ->
+                val movie = movies[index]
                 MovieItem(
                     movie = movie,
                     modifier = Modifier

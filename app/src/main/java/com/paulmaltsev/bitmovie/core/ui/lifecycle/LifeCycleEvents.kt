@@ -8,6 +8,9 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 
+/**
+ * Use the RESUMED callback to detect when the Compose onResume state is triggered.
+ */
 @Composable
 fun onResume(voidCallback: VoidCallback) {
     val lifecycleOwner = LocalLifecycleOwner.current

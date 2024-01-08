@@ -29,7 +29,7 @@ class HomeViewModel : ViewModel() {
     val moviesNowPlaying = _moviesNowPlaying.asStateFlow()
 
     // Should be injected with dagger
-    private val moviesRepository:MoviesRepository = MoviesRepositoryImpl(RetrofitClient)
+    private val moviesRepository: MoviesRepository = MoviesRepositoryImpl(RetrofitClient)
 
     init {
         downloadMovies()

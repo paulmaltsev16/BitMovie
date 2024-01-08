@@ -148,7 +148,7 @@ private fun MovieDetails(
         AppSpacer()
 
         Text(
-            text = "Original Title: ${movie.originalTitle ?: "-"}",
+            text = stringResource(id = R.string.original_title, movie.originalTitle ?: "-"),
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
             color = Color.Gray
@@ -157,7 +157,7 @@ private fun MovieDetails(
         AppSpacer(dimensionResource(id = R.dimen.padding_small))
 
         Text(
-            text = "Release Date: ${movie.releaseDate ?: "-"}",
+            text = stringResource(id = R.string.release_date, movie.releaseDate ?: "-"),
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
             color = Color.Gray
@@ -165,8 +165,9 @@ private fun MovieDetails(
 
         AppSpacer(dimensionResource(id = R.dimen.padding_small))
 
+
         Text(
-            text = "Rating: ${movie.voteAverage ?: "-"}",
+            text = stringResource(R.string.rating, movie.voteAverage ?: "-"),
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
             color = Color.Gray

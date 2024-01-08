@@ -12,9 +12,7 @@ interface MoviesRepository {
     suspend fun getMovieDetailsById(id: String?): MovieModel?
 }
 
-class MoviesRepositoryImpl(
-    private val client: RetrofitClient
-) : MoviesRepository {
+class MoviesRepositoryImpl(private val client: RetrofitClient) : MoviesRepository {
     override suspend fun downloadMovies(movieCollection: String, page: Int): ArrayList<MovieModel> {
         return try {
             val api = client.instance.create(MoviesApi::class.java)

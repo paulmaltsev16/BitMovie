@@ -7,12 +7,15 @@
     <string name="the_movie_database">The Movie Database</string>
     <string name="content_description_app_logo">Application logo</string>
     <string name="content_description_movie_remote_image">Movie remote image</string>
-    <string name="content_description_favorite_icon">Favorite icon\n</string>
-    <string name="content_description_play_icon">Play icon\n</string>
+    <string name="content_description_favorite_icon">Favorite icon</string>
+    <string name="content_description_play_icon">Play icon</string>
     <string name="favorites">Favorites</string>
     <string name="connection_lost">Connection lost</string>
-    <string name="upcoming">Upcoming\n</string>
-    <string name="top_rated">Top rated\n</string>
-    <string name="now_playing">Now playing\n</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top rated</string>
+    <string name="now_playing">Now playing</string>
     <string name="something_went_wrong_please_try_later">Something went wrong please try later</string>
+    <string name="rating">Rating: %s</string>
+    <string name="release_date">Release data: %s</string>
+    <string name="original_title">Original title: %s</string>
 </resources>
