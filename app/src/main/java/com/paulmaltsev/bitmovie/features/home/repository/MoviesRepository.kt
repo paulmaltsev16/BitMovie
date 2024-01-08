@@ -18,7 +18,11 @@ class MoviesRepositoryImpl(private val client: RetrofitClient) : MoviesRepositor
         return try {
             val api = client.instance.create(MoviesApi::class.java)
             val result = api.getMovies(movieCollection.collectionName, page)
-            result?.body()?.movies ?: arrayListOf()
+            (result?.body()?.movies ?: arrayListOf()).also {
+                it.forEach{movie->
+                    Log.i("tester", "id- ${movie.id}")
+                }
+            }
         } catch (e: Exception) {
             Log.e(TAG, "downloadMovies, failed: ", e)
             arrayListOf()

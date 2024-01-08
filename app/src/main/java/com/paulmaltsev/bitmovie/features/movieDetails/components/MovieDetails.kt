@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +29,7 @@ import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 fun MovieDetails(
     movie: MovieModel,
     isFavoriteMovie: Boolean,
+    onPlayIconClick: VoidCallback,
     onFavoriteIconClick: VoidCallback
 ) {
     Column(
@@ -43,6 +45,11 @@ fun MovieDetails(
             AppIconButton(
                 imageVector = icon,
                 onClick = onFavoriteIconClick
+            )
+
+            AppIconButton(
+                imageVector = Icons.Default.PlayCircle,
+                onClick = onPlayIconClick
             )
         }
 

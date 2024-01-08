@@ -11,6 +11,7 @@ import com.paulmaltsev.bitmovie.features.legalContent.tmdb.TmdbScreen
 import com.paulmaltsev.bitmovie.features.menu.MenuScreen
 import com.paulmaltsev.bitmovie.features.movieCategory.MovieCategoryScreen
 import com.paulmaltsev.bitmovie.features.movieDetails.MovieDetailsScreen
+import com.paulmaltsev.bitmovie.features.trailerPreview.TrailerPreviewScreen
 
 @Composable
 fun AppNavigation(
@@ -39,6 +40,10 @@ fun AppNavigation(
             // It can crash, but we want to know if something is wrong earlier as possible.
             val collectionType = it.arguments?.getString("collectionType")?.toInt()
             MovieCategoryScreen(collectionType!!, navController)
+        }
+        composable(AppScreens.TrailerPreview.route + "/" + "{movieId}") {
+            val movieId = it.arguments?.getString("movieId")?.toInt()
+            TrailerPreviewScreen(movieId!!, navController)
         }
     }
 }

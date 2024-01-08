@@ -18,4 +18,5 @@ sealed class AppScreens(
     object TmdbLegalContent : AppScreens("tmdb_legal_content_screen")
     object Menu : AppScreens("menu_screen", Icons.Default.Menu, R.string.menu)
     object Category : AppScreens("category_screen")
+    object TrailerPreview : AppScreens("trailer_preview_screen")
 }
