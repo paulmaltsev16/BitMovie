@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
             var showBottomBar by rememberSaveable { mutableStateOf(true) }
             showBottomBar = isShowBottomNavBar(navController)
             val connectionStatus by connectionStatusManager.observe().collectAsState(
-                initial = ConnectionStatusManager.Status.LOST
+                initial = ConnectionStatusManager.Status.AVAILABLE
             )
 
             BitMovieTheme {

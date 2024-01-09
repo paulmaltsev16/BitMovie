@@ -50,26 +50,35 @@ fun HomeScreen(
         MovieListSection(
             movies = moviesUpcoming.value,
             titleId = R.string.upcoming,
-            navController = navController
-        ) {
-            navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.UPCOMING.ordinal)
-        }
+            onSeeMoreClicked = {
+                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.UPCOMING.ordinal)
+            },
+            onMovieItemClicked = { movieId ->
+                navController.navigate(AppScreens.MovieDetails.route + "/" + movieId)
+            }
+        )
 
         MovieListSection(
             movies = moviesTopRated.value,
             titleId = R.string.top_rated,
-            navController = navController
-        ) {
-            navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.TOP_RATED.ordinal)
-        }
+            onSeeMoreClicked = {
+                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.TOP_RATED.ordinal)
+            },
+            onMovieItemClicked = { movieId ->
+                navController.navigate(AppScreens.MovieDetails.route + "/" + movieId)
+            }
+        )
 
         MovieListSection(
             movies = moviesNowPlaying.value,
             titleId = R.string.now_playing,
-            navController = navController
-        ) {
-            navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.NOW_PLAYING.ordinal)
-        }
+            onSeeMoreClicked = {
+                navController.navigate(AppScreens.Category.route + "/" + MoviesCollectionType.NOW_PLAYING.ordinal)
+            },
+            onMovieItemClicked = { movieId ->
+                navController.navigate(AppScreens.MovieDetails.route + "/" + movieId)
+            }
+        )
     }
 }
 

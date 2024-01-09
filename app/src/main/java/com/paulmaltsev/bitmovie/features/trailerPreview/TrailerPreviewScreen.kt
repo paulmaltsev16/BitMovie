@@ -13,7 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.paulmaltsev.bitmovie.R
-import com.paulmaltsev.bitmovie.core.data.constants.Constants.Companion.YOU_TUBE_BAS_PREVIEW_URL
+import com.paulmaltsev.bitmovie.core.data.constants.Constants.Companion.YOU_TUBE_BASE_PREVIEW_URL
 import com.paulmaltsev.bitmovie.core.ui.views.AppTopBar
 import com.paulmaltsev.bitmovie.core.ui.views.AppWebView
 import com.paulmaltsev.bitmovie.features.trailerPreview.viewModel.TrailerPreviewViewModel
@@ -40,7 +40,7 @@ fun TrailerPreviewScreen(
                 .fillMaxSize(),
         ) {
             AppWebView(
-                stringUrl = String.format(YOU_TUBE_BAS_PREVIEW_URL, youTubeKey),
+                stringUrl = String.format(YOU_TUBE_BASE_PREVIEW_URL, youTubeKey),
                 onCloseButtonClick = {
                     navController.popBackStack()
                 }

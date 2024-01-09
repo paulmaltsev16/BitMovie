@@ -21,11 +21,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.paulmaltsev.bitmovie.R
 import com.paulmaltsev.bitmovie.core.models.movie.MovieModel
-import com.paulmaltsev.bitmovie.core.navigation.AppScreens
 import com.paulmaltsev.bitmovie.core.ui.views.MovieItem
 import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 
@@ -33,8 +30,8 @@ import com.paulmaltsev.bitmovie.core.utils.VoidCallback
 fun MovieListSection(
     movies: ArrayList<MovieModel>,
     titleId: Int,
-    navController: NavController,
-    onSeeMoreClicked: VoidCallback
+    onSeeMoreClicked: VoidCallback,
+    onMovieItemClicked: (Int?) -> Unit
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -67,14 +64,13 @@ fun MovieListSection(
             val movie = movies[it]
             MovieItem(
                 movie = movie,
+                onClick = { onMovieItemClicked(movie.id) },
                 modifier = Modifier
                     .width(170.dp)
                     .height(250.dp)
                     .fillMaxSize()
                     .height(IntrinsicSize.Max)
-            ) {
-                navController.navigate(AppScreens.MovieDetails.route + "/" + movie.id)
-            }
+            )
         }
     }
 }
@@ -82,7 +78,6 @@ fun MovieListSection(
 @Preview
 @Composable
 fun BeerItemPreview() {
-    val navController = rememberNavController()
     MovieListSection(
         movies = arrayListOf(
             MovieModel(
@@ -90,7 +85,7 @@ fun BeerItemPreview() {
             )
         ),
         titleId = R.string.app_name,
-        navController = navController,
-        onSeeMoreClicked = {}
+        onSeeMoreClicked = {},
+        onMovieItemClicked = {}
     )
 }

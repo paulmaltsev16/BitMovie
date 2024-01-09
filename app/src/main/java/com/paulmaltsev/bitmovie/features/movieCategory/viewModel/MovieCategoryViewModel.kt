@@ -24,7 +24,10 @@ class MovieCategoryViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             currentPage += 1
             val movies = moviesRepository.downloadMovies(moviesCollectionType, currentPage)
-            _movies.emit(movies)
+            if (movies.isNotEmpty()) {
+                movies.addAll(0, _movies.value)
+                _movies.emit(movies)
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
@@ -33,6 +34,7 @@ fun MovieCategoryScreen(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val viewModel = viewModel<MovieCategoryViewModel>()
     val movies = viewModel.movies.collectAsStateWithLifecycle().value
+    val gridState = rememberLazyGridState()
 
     Scaffold(
         topBar = AppTopBar(
@@ -49,6 +51,7 @@ fun MovieCategoryScreen(
 
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 128.dp),
+            state = gridState,
             modifier = Modifier
                 .padding(paddingValues)
                 .appPadding()
