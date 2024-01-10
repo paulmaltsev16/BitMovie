@@ -14,7 +14,7 @@ import com.paulmaltsev.bitmovie.features.movieDetails.MovieDetailsScreen
 import com.paulmaltsev.bitmovie.features.trailerPreview.TrailerPreviewScreen
 
 @Composable
-fun AppNavigation(
+fun AppNavigationGraph(
     navController: NavHostController, modifier: Modifier
 ) {
     NavHost(

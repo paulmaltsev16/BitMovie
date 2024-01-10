@@ -2,7 +2,6 @@ package com.paulmaltsev.bitmovie.features.menu
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -33,31 +33,27 @@ fun MenuScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .appPadding()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.SpaceBetween
+            .verticalScroll(rememberScrollState())
     ) {
-        Column(
+        Image(
+            painter = painterResource(id = R.mipmap.ic_launcher),
+            contentDescription = stringResource(R.string.content_description_app_logo),
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Image(
-                painter = painterResource(id = R.mipmap.ic_launcher),
-                contentDescription = stringResource(R.string.content_description_app_logo),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(128.dp)
-                    .clip(CircleShape)
-                    .border(2.dp, Color.Gray, CircleShape)
-                    .align(Alignment.CenterHorizontally)
-            )
+                .size(128.dp)
+                .clip(CircleShape)
+                .border(2.dp, Color.Gray, CircleShape)
+                .align(Alignment.CenterHorizontally)
+        )
 
-            AppSpacer()
+        AppSpacer()
 
-            Text(text = stringResource(R.string.app_intro))
-        }
+        Text(text = stringResource(R.string.app_intro))
+
+        AppSpacer(dimensionResource(id = R.dimen.padding_big))
 
         AppButton(
-            title = "Explore data source",
+            title = stringResource(R.string.explore_data_source),
             modifier = Modifier
                 .fillMaxWidth()
         ) {

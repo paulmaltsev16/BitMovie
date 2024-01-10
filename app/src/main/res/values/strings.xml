@@ -27,4 +27,5 @@
     <string name="preview">Preview</string>
     <string name="loading">loading</string>
     <string name="close">close</string>
+    <string name="explore_data_source">Explore data source</string>
 </resources>

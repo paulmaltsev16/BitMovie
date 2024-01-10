@@ -1,70 +1,73 @@
 package com.paulmaltsev.bitmovie.core.navigation
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paulmaltsev.bitmovie.R
-import com.paulmaltsev.bitmovie.core.utils.ComposableVoidCallback
 
 @Composable
 fun AppBottomNavigationBar(
-    navController: NavController,
-    screens: List<AppScreens>
+    navController: NavHostController, screens: List<AppScreens>
 ) {
-    var selectedItem by remember { mutableStateOf(0) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
-    // Looking for the selectedItem according to the last destination route.
-    val navBackStackEntry by (navController.currentBackStackEntryAsState())
-    val currentRoute = navBackStackEntry?.destination?.route
-    screens.forEachIndexed { index, navigationItem ->
-        if (navigationItem.route == currentRoute) {
-            selectedItem = index
-        }
+    val isBottomBarScreen = screens.any { it.route == currentDestination?.route }
+    if (!isBottomBarScreen){
+        return
     }
 
-    NavigationBar {
-        screens.forEachIndexed { index, item ->
-            NavigationBarItem(
-                alwaysShowLabel = true,
-                icon = NavigationIcon(item.icon!!),
-                label = NavigationTitle(stringResource(item.titleId!!)),
-                selected = selectedItem == index,
-                onClick = {
-                    selectedItem = index
-                    navController.navigate(item.route) {
-                        navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) {
-                                saveState = true
-                            }
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
+    NavigationBar(
+        contentColor = colorResource(id = R.color.main)
+    ) {
+        screens.forEach { screen ->
+            AddItem(
+                screen = screen,
+                currentDestination = currentDestination,
+                navController = navController
             )
         }
     }
 }
 
 @Composable
-private fun NavigationIcon(imageVector: ImageVector): ComposableVoidCallback = {
-    Icon(
-        imageVector = imageVector,
-        contentDescription = stringResource(id = R.string.content_description_bottom_navigation_icon)
+fun RowScope.AddItem(
+    screen: AppScreens, currentDestination: NavDestination?, navController: NavHostController
+) {
+    NavigationBarItem(
+        label = {
+            Text(text = stringResource(screen.titleId!!))
+        },
+        icon = {
+            Icon(
+                imageVector = screen.icon!!,
+                contentDescription = stringResource(id = R.string.content_description_bottom_navigation_icon)
+            )
+        },
+        onClick = {
+            navController.navigate(screen.route) {
+                popUpTo(navController.graph.findStartDestination().id) {
+                    saveState = true
+                }
+                launchSingleTop = true
+                restoreState = true
+            }
+        },
+        selected = currentDestination?.hierarchy?.any {
+            it.route == screen.route
+        } == true,
     )
 }
 
-@Composable
-private fun NavigationTitle(title: String): ComposableVoidCallback = {
-    Text(text = title)
-}
+

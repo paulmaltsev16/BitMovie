@@ -12,11 +12,11 @@ sealed class AppScreens(
     val icon: ImageVector? = null,
     val titleId: Int? = null
 ) {
-    object Home : AppScreens("home_screen", Icons.Default.Home, R.string.home)
-    object MovieDetails : AppScreens("profile_screen")
-    object Favorites : AppScreens("favorites_screen", Icons.Default.Favorite, R.string.favorites)
-    object TmdbLegalContent : AppScreens("tmdb_legal_content_screen")
-    object Menu : AppScreens("menu_screen", Icons.Default.Menu, R.string.menu)
-    object Category : AppScreens("category_screen")
-    object TrailerPreview : AppScreens("trailer_preview_screen")
+    data object Favorites : AppScreens("favorites_screen", Icons.Default.Favorite, R.string.favorites)
+    data object Menu : AppScreens("menu_screen", Icons.Default.Menu, R.string.menu)
+    data object Home : AppScreens("home_screen", Icons.Default.Home, R.string.home)
+    data object TmdbLegalContent : AppScreens("tmdb_legal_content_screen")
+    data object TrailerPreview : AppScreens("trailer_preview_screen")
+    data object MovieDetails : AppScreens("profile_screen")
+    data object Category : AppScreens("category_screen")
 }
